@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import assets, { messagesDummyData } from '../assets/assets'
 
 const ChatContainer = ({ selectedUser, setSelectedUser }) => {
+  const scrollEnd = useRef();
   return selectedUser ? (
     <div className='h-full overflow-scroll relative backdrop-blur-lg'>
       {/* header */}
@@ -31,6 +32,7 @@ const ChatContainer = ({ selectedUser, setSelectedUser }) => {
             </div>
           ))
         }
+        <div ref={scrollEnd}></div>
       </div>
     </div>
   ) : (
