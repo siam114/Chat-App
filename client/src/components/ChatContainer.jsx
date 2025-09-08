@@ -24,6 +24,10 @@ const ChatContainer = ({ selectedUser, setSelectedUser }) => {
               ) : (
                 <p className={`p-2 max-w-[200px] md:text-sm font-light rounded-lg mb-8 break-all bg-violet-500/30 text-white ${msg.senderId === '680f50e4f10f3cd28382ecf9' ? 'rounded-br-none' : 'rounded-bl-none'}`}>{msg.text}</p>
               )}
+              <div className='text-center text-xs'>
+                <img src={msg.senderId === '680f50e4f10f3cd28382ecf9' ? assets.avatar_icon : assets.profile_martin} className='w-7 rounded-full' alt="" />
+                <p className='text-gray-500'>{msg.createdAt}</p>
+              </div>
             </div>
           ))
         }
