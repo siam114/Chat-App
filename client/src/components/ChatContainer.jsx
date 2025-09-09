@@ -43,6 +43,14 @@ const ChatContainer = ({ selectedUser, setSelectedUser }) => {
         }
         <div ref={scrollEnd}></div>
       </div>
+
+      {/* bottom area */}
+      <div className='absolute bottom-0 left-0 right-0 flex items-center gap-3 p-3'>
+        <div>
+          <input type="text" placeholder='Send a message' />
+          <input type="file" id='image' accept='image/png, image/jpeg' hidden />
+        </div>
+      </div>
     </div>
   ) : (
     <div className='flex flex-col justify-center items-center gap-2 text-gray-500 bg-white/10 max-md:hidden'>
