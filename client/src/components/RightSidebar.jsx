@@ -1,5 +1,5 @@
 import React from 'react'
-import assets from '../assets/assets'
+import assets, { imagesDummyData } from '../assets/assets'
 
 const RightSideBar = ({selectedUser}) => {
   return selectedUser &&  (
@@ -19,7 +19,11 @@ const RightSideBar = ({selectedUser}) => {
       <div className='px-5 text-xs'>
         <p>Media</p>
         <div className='mt-2 max-h-[200px] overflow-y-scroll grid grid-cols-2 gap-4 opacity-80'>
-          
+          {imagesDummyData.map((url,index) => (
+            <div key={index} onClick={()=>window.open(url)} className='cursor-pointer rounded'>
+              <img src={url} className='h-full rounded-md' alt="" />
+            </div>
+          ))}
         </div>
       </div>
     </div>
