@@ -3,7 +3,7 @@ import assets from './../assets/assets';
 
 const LoginPage = () => {
 
-  const [currState, setCurrState] = useState('sign up')
+  const [currState, setCurrState] = useState('Sign up')
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,7 +22,7 @@ const LoginPage = () => {
           <img src={assets.arrow_icon} className='w-5 cursor-pointer' alt="" />
          </h2>
 
-         {currState === 'sign up' && !isDataSubmitted && (
+         {currState === 'Sign up' && !isDataSubmitted && (
           <input onChange={(e)=>setFullName(e.target.value)} value={fullName} type="text" className='p-2 border border-gray-500 rounded-md focus:outline-none' placeholder='Full Name' required />
          )}
 
@@ -34,13 +34,18 @@ const LoginPage = () => {
           </>
          )}
 
-         {currState === 'sign up' && !isDataSubmitted && (
+         {currState === 'Sign up' && !isDataSubmitted && (
           <textarea onChange={(e)=>setBio(e.target.value)} value={bio} rows={4}  className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' placeholder='provide a short bio.....' required></textarea>
          )}
 
          <button type='submit' className='py-3 bg-gradient-to-r from-purple-400 to-violet-600 rounded-md text-white cursor-pointer'>
-          {currState === 'sign up' ? 'Create Account' : 'Login Now'}
+          {currState === 'Sign up' ? 'Create Account' : 'Login Now'}
          </button>
+
+         <div className='flex items-center gap-2 text-sm text-gray-500'>
+          <input type="checkbox" />
+          <p>Agree to the terms of use & privacy policy</p>
+         </div>
 
       </form>
     </div>
