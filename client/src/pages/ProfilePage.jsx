@@ -1,4 +1,11 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const ProfilePage = () => {
+
+  const [selectedImg, setSelectedImg] = useState(null);
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-cover bg-no-repeat flex justify-center items-center">
       <div className="w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2 border-gray-600 flex justify-between items-center max-sm:flex-col-reverse rounded-lg">
