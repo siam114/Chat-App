@@ -16,7 +16,8 @@ const ProfilePage = () => {
           <h3 className="text-lg">Profile Details</h3>
           <label htmlFor="avatar" className="flex items-center gap-3 cursor-pointer">
             <input onChange={(e)=>setSelectedImg(e.target.files[0])} type="file" id="avatar" accept=".png, .jpg, .jpeg" hidden />
-            <img src={selectedImg ? URL.createObjectURL(selectedImg) : assets.avatar_icon} alt="" />
+            <img src={selectedImg ? URL.createObjectURL(selectedImg) : assets.avatar_icon} alt="" className={`w-12 h-12 ${selectedImg && 'rounded-full'}`} />
+            upload profile image
           </label>
          </form>
          <img src="" alt="" />
