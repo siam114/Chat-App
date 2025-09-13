@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import assets from "../assets/assets";
 
 const ProfilePage = () => {
 
   const [selectedImg, setSelectedImg] = useState(null);
+  const [name, setName] = useState("Martin Johnson");
+  const [bio, setBio] = useState("Hi Everyone! I am using QuickChat.");
   const navigate = useNavigate();
 
   return (
@@ -12,8 +15,8 @@ const ProfilePage = () => {
          <form className="flex flex-col gap-5 p-10 flex-1">
           <h3 className="text-lg">Profile Details</h3>
           <label htmlFor="avatar" className="flex items-center gap-3 cursor-pointer">
-            <input type="file" id="avatar" accept=".png, .jpg, .jpeg" hidden />
-            <img src="" alt="" />
+            <input onChange={(e)=>setSelectedImg(e.target.files[0])} type="file" id="avatar" accept=".png, .jpg, .jpeg" hidden />
+            <img src={selectedImg ? URL.createObjectURL(selectedImg) : assets.avatar_icon} alt="" />
           </label>
          </form>
          <img src="" alt="" />
