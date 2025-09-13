@@ -53,6 +53,8 @@ const ProfilePage = () => {
             name=""
             id=""
           ></textarea>
+
+          <button type="submit" className="bg-gradient-to-r from-purple-400 to-violet-600 text-white p-2 rounded-full text-lg cursor-pointer">Save</button>
         </form>
         <img src="" alt="" />
       </div>
