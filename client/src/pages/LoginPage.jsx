@@ -1,72 +1,130 @@
-import React, { useState } from 'react'
-import assets from './../assets/assets';
+import React, { useState } from "react";
+import assets from "./../assets/assets";
 
 const LoginPage = () => {
-
-  const [currState, setCurrState] = useState('Sign up')
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [bio, setBio] = useState('');
+  const [currState, setCurrState] = useState("Sign up");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [bio, setBio] = useState("");
   const [isDataSubmitted, setIsDataSubmitted] = useState(false);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
 
-    if(currState === 'Sign up' && !isDataSubmitted){
+    if (currState === "Sign up" && !isDataSubmitted) {
       setIsDataSubmitted(true);
       return;
     }
-  }
+  };
 
   return (
-    <div className='min-h-screen bg-cover bg-center flex items-center justify-center gap-8 sm:justify-evenly max-sm:flex-col backdrop-blur-2xl'>
+    <div className="min-h-screen bg-cover bg-center flex items-center justify-center gap-8 sm:justify-evenly max-sm:flex-col backdrop-blur-2xl">
       {/* left */}
-      <img src={assets.logo_big} alt="" className='w-[min(30vw,250px)]'/>
+      <img src={assets.logo_big} alt="" className="w-[min(30vw,250px)]" />
 
       {/* right */}
-      <form onSubmit={onSubmitHandler} className='border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg'>
-         <h2 className='font-medium text-2xl flex justify-between items-center'>
+      <form
+        onSubmit={onSubmitHandler}
+        className="border-2 bg-white/8 text-white border-gray-500 p-6 flex flex-col gap-6 rounded-lg shadow-lg"
+      >
+        <h2 className="font-medium text-2xl flex justify-between items-center">
           {currState}
-          {isDataSubmitted && <img src={assets.arrow_icon} onClick={()=> setIsDataSubmitted(false)} className='w-5 cursor-pointer' alt="" />}
-         </h2>
+          {isDataSubmitted && (
+            <img
+              src={assets.arrow_icon}
+              onClick={() => setIsDataSubmitted(false)}
+              className="w-5 cursor-pointer"
+              alt=""
+            />
+          )}
+        </h2>
 
-         {currState === 'Sign up' && !isDataSubmitted && (
-          <input onChange={(e)=>setFullName(e.target.value)} value={fullName} type="text" className='p-2 border border-gray-500 rounded-md focus:outline-none' placeholder='Full Name' required />
-         )}
+        {currState === "Sign up" && !isDataSubmitted && (
+          <input
+            onChange={(e) => setFullName(e.target.value)}
+            value={fullName}
+            type="text"
+            className="p-2 border border-gray-500 rounded-md focus:outline-none"
+            placeholder="Full Name"
+            required
+          />
+        )}
 
-         {!isDataSubmitted && (
+        {!isDataSubmitted && (
           <>
-           <input onChange={(e)=>setEmail(e.target.value)} value={email} type="email" placeholder='Email Address' className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' required />
+            <input
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              type="email"
+              placeholder="Email Address"
+              className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            />
 
-           <input onChange={(e)=>setPassword(e.target.value)} value={password} type="password" placeholder='Password' className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' required />
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              type="password"
+              placeholder="Password"
+              className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              required
+            />
           </>
-         )}
+        )}
 
-         {currState === 'Sign up' && isDataSubmitted && (
-          <textarea onChange={(e)=>setBio(e.target.value)} value={bio} rows={4}  className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' placeholder='provide a short bio.....' required></textarea>
-         )}
+        {currState === "Sign up" && isDataSubmitted && (
+          <textarea
+            onChange={(e) => setBio(e.target.value)}
+            value={bio}
+            rows={4}
+            className="p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            placeholder="provide a short bio....."
+            required
+          ></textarea>
+        )}
 
-         <button type='submit' className='py-3 bg-gradient-to-r from-purple-400 to-violet-600 rounded-md text-white cursor-pointer'>
-          {currState === 'Sign up' ? 'Create Account' : 'Login Now'}
-         </button>
+        <button
+          type="submit"
+          className="py-3 bg-gradient-to-r from-purple-400 to-violet-600 rounded-md text-white cursor-pointer"
+        >
+          {currState === "Sign up" ? "Create Account" : "Login Now"}
+        </button>
 
-         <div className='flex items-center gap-2 text-sm text-gray-500'>
+        <div className="flex items-center gap-2 text-sm text-gray-500">
           <input type="checkbox" />
           <p>Agree to the terms of use & privacy policy</p>
-         </div>
+        </div>
 
-         <div className='flex flex-col gap-2 text-center'>
-          {currState === 'Sign up' ? (
-            <p className='text-sm text-gray-600'>Already have an account <span onClick={()=>{setCurrState('Login'); setIsDataSubmitted(false)}} className='font-medium text-violet-500 cursor-pointer'>Login here</span></p>
+        <div className="flex flex-col gap-2 text-center">
+          {currState === "Sign up" ? (
+            <p className="text-sm text-gray-600">
+              Already have an account{" "}
+              <span
+                onClick={() => {
+                  setCurrState("Login");
+                  setIsDataSubmitted(false);
+                }}
+                className="font-medium text-violet-500 cursor-pointer"
+              >
+                Login here
+              </span>
+            </p>
           ) : (
-            <p className='text-sm text-gray-600'>Create an account <span onClick={()=>setCurrState('Sign up')} className='font-medium text-violet-500 cursor-pointer'>Click here</span></p>
+            <p className="text-sm text-gray-600">
+              Create an account{" "}
+              <span
+                onClick={() => setCurrState("Sign up")}
+                className="font-medium text-violet-500 cursor-pointer"
+              >
+                Click here
+              </span>
+            </p>
           )}
-         </div>
-
+        </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
