@@ -4,53 +4,62 @@ import bcrypt from "bcryptjs";
 
 //signup a new user
 export const signup = async (req, res) => {
-   const {fullName, email, password, bio} = req.body;
+  const { fullName, email, password, bio } = req.body;
 
-   try {
-    if(!fullName || !email || !password || !bio){
-        return res.json({success:false, message: "Missing Details"})
+  try {
+    if (!fullName || !email || !password || !bio) {
+      return res.json({ success: false, message: "Missing Details" });
     }
 
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
 
-    if(user){
-        return res.json({success:false, message: "User already exists"})
+    if (user) {
+      return res.json({ success: false, message: "User already exists" });
     }
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     const newUser = await User.create({
-        fullName,
-        email,
-        password: hashedPassword,
-        bio
+      fullName,
+      email,
+      password: hashedPassword,
+      bio,
     });
 
     const token = generateToken(newUser._id);
 
-    res.json({success:true, userData:newUser, token, message: "account created successfully"})
-
-   } catch (error) {
+    res.json({
+      success: true,
+      userData: newUser,
+      token,
+      message: "account created successfully",
+    });
+  } catch (error) {
     console.log(error.message);
-    res.json({success:false, message: error.message})
-   }
-}
+    res.json({ success: false, message: error.message });
+  }
+};
 
 //controller for login
 export const login = async (req, res) => {
-    
-    try {
-        const {email, password} = req.body;
-        const userData = await User.findOne({email});
+  try {
+    const { email, password } = req.body;
+    const userData = await User.findOne({ email });
 
-        const isPasswordCorrect = await bcrypt.compare(password, userData.password);
+    const isPasswordCorrect = await bcrypt.compare(password, userData.password);
 
-        if(!isPasswordCorrect){
-            return res.json({success:false, message: "Invalid Credentials"})
-        }
-        
-    } catch (error) {
-        
+    if (!isPasswordCorrect) {
+      return res.json({ success: false, message: "Invalid Credentials" });
     }
-}
+
+    const token = generateToken(userData._id);
+
+    res.json({
+      success: true,
+      userData,
+      token,
+      message: "account created successfully",
+    });
+  } catch (error) {}
+};
