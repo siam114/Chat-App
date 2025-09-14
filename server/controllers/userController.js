@@ -73,3 +73,19 @@ export const login = async (req, res) => {
 export const checkAuth = async (req, res) => {
     res.json({success: true, user: req.user});
 }
+
+//controller to update user profile details
+export const updateProfile = async (req, res) => {
+  try {
+    const { profilePic,bio,fullName} = req.body;
+
+    const userId = req.user._id;
+    let updatedUser;
+
+    if(!profilePic) {
+      await User.findByIdAndUpdate(userId, {bio,fullName}, {new: true});
+    }
+  } catch (error) {
+    
+  }
+}
