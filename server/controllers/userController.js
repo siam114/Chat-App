@@ -41,6 +41,7 @@ export const signup = async (req, res) => {
   }
 };
 
+
 //controller for login
 export const login = async (req, res) => {
   try {
@@ -66,3 +67,9 @@ export const login = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+
+//controller to check if user is logged in or not
+export const checkAuth = async (req, res) => {
+    res.json({success: true, user: req.user});
+}
