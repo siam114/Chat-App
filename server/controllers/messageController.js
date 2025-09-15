@@ -23,3 +23,8 @@ export const getUsersForSidebar = async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 }
+
+//get all message for selected user
+export const getMessages = async (req, res) => {
+
+}
