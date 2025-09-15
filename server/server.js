@@ -5,10 +5,18 @@ import http from 'http';
 import { connectDB } from './lib/db.js';
 import userRouter from './routes/userRoutes.js';
 import messageRouter from './routes/messageRoutes.js';
+import {Server} from 'socket.io';
 
 //create express app and http server
 const app = express();
 const server = http.createServer(app);
+
+//socket io setup
+export const io = new Server(server, {
+    cors: {
+        origin: "*",
+    }
+})
 
 //middlewares
 app.use(express.json({limit: "4mb"}))
