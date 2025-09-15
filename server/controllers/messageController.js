@@ -66,3 +66,14 @@ export const markMessageAsSeen = async (req, res) => {
     res.json({ success: false, message: error.message });
     }
 }
+
+
+//send message to selected user
+export const sendMessage = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        console.log(error.message);
+    res.json({ success: false, message: error.message });
+    }
+}
