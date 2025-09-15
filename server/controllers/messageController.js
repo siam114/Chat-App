@@ -82,6 +82,13 @@ export const sendMessage = async (req, res) => {
             imageUrl = uploadResponse.secure_url;
         }
 
+        const newMessage = new Message({
+            senderId, receiverId, text, image: imageUrl
+
+        })
+
+        res.json({success: true, newMessage});
+
     } catch (error) {
         console.log(error.message);
     res.json({ success: false, message: error.message });
