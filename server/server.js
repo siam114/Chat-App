@@ -18,6 +18,15 @@ export const io = new Server(server, {
     }
 })
 
+//store online user
+export const userSocketMap = {};  // {userId: socketId}
+
+//socket connection handler
+io.on("connection", (socket) => {
+    const userId = socket.handshake.query.userId;
+    console.log('User connected: ', userId);
+})
+
 //middlewares
 app.use(express.json({limit: "4mb"}))
 app.use(cors());
