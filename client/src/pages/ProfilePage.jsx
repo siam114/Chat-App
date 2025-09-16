@@ -9,14 +9,17 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     navigate("/");
-  }
+  };
 
   return (
     <div className="min-h-screen bg-cover bg-no-repeat flex justify-center items-center">
       <div className="w-5/6 max-w-2xl backdrop-blur-2xl text-gray-300 border-2 border-gray-600 flex justify-between items-center max-sm:flex-col-reverse rounded-lg">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-10 flex-1">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-5 p-10 flex-1"
+        >
           <h3 className="text-lg">Profile Details</h3>
           <label
             htmlFor="avatar"
@@ -59,9 +62,18 @@ const ProfilePage = () => {
             id=""
           ></textarea>
 
-          <button type="submit" className="bg-gradient-to-r from-purple-400 to-violet-600 text-white p-2 rounded-full text-lg cursor-pointer">Save</button>
+          <button
+            type="submit"
+            className="bg-gradient-to-r from-purple-400 to-violet-600 text-white p-2 rounded-full text-lg cursor-pointer"
+          >
+            Save
+          </button>
         </form>
-        <img src={assets.logo_icon} className="max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10" alt="" />
+        <img
+          src={assets.logo_icon}
+          className="max-w-44 aspect-square rounded-full mx-10 max-sm:mt-10"
+          alt=""
+        />
       </div>
     </div>
   );
