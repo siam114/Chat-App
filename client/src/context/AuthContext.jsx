@@ -14,7 +14,10 @@ export const AuthProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
 
   const value = {
-    axios
+    axios,
+    authUser,
+    onlineUsers,
+    socket
   };
 
   return (
