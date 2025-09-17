@@ -2,6 +2,8 @@ import jwt from 'jsonwebtoken';
 
 //function to generate JWT token a user
 export const generateToken = (userId) => {
-    const token = jwt.sign({userId}, process.env.JWT_SECRET);
+    const token = jwt.sign({userId}, process.env.JWT_SECRET, {
+        expiresIn: "1d",
+    });
     return token;
 }
