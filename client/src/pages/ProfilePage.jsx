@@ -8,8 +8,8 @@ const ProfilePage = () => {
   const {authUser, updateProfile} = useContext(AuthContext)
 
   const [selectedImg, setSelectedImg] = useState(null);
-  const [name, setName] = useState("Martin Johnson");
-  const [bio, setBio] = useState("Hi Everyone! I am using QuickChat.");
+  const [name, setName] = useState(authUser.fullName);
+  const [bio, setBio] = useState(authUser.bio);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -24,7 +24,8 @@ const ProfilePage = () => {
     reader.readAsDataURL(selectedImg);
     reader.onload = async () =>{
       const base64Image = reader.result;
-      await updateProfile({profilePic: base64Image});
+      await updateProfile({profilePic: base64Image, fullName: name, bio});
+      navigate('/')
     }
   };
 
