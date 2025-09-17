@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+import toast from 'react-hot-toast'
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 axios.defaults.baseURL = backendUrl;
@@ -21,9 +22,16 @@ export const AuthProvider = ({ children }) => {
                 setAuthUser(data.user);
             }
         } catch (error) {
-            
+            toast.error(error.message)
         }
     }
+
+    useEffect(()=>{
+      if(token){
+        axios.defaults.headers.common['token'] = token;
+      }
+      checkAuth();
+    },[])
 
   const value = {
     axios,
