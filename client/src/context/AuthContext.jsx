@@ -68,6 +68,7 @@ export const AuthProvider = ({ children }) => {
         axios.defaults.headers.common['token'] = token;
       }
       checkAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
   const value = {
