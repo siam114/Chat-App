@@ -21,10 +21,28 @@ export const AuthProvider = ({ children }) => {
             const {data} = await axios.get('/api/auth/check')
             if(data.success) {
                 setAuthUser(data.user);
+                connectSocket(data.user);
             }
         } catch (error) {
             toast.error(error.message)
         }
+    }
+
+    //login function to handle user authentication and socket connection
+    const login = async (state, credentials) =>{
+      try {
+        const {data} = await axios.post(`/api/auth/${state}`, credentials);
+        if(data.success){
+          setAuthUser(data.userData);
+          connectSocket(data.userData);
+          axios.defaults.headers.common["token"] = data.token;
+          setToken(data.token);
+          localStorage.setItem("token", data.token);
+          toast.success(data.message);
+        }
+      } catch (error) {
+        
+      }
     }
 
     //connect socket function to handle soclet connection and online user updates
