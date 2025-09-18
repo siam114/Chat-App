@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import assets, { userDummyData } from "./../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from './../context/AuthContext';
+import { ChatContext } from "../context/ChatContext";
 
-const Sidebar = ({ selectedUser, setSelectedUser }) => {
-  const {logout} = useContext(AuthContext);
+const Sidebar = () => {
+  const {selectedUser, setSelectedUser, users, getusers,unseenMessages, setUnseenMessages } = useContext(ChatContext);
+  const {logout, onlineUsers} = useContext(AuthContext);
   
   const navigate = useNavigate();
 
