@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import assets, { userDummyData } from "./../assets/assets";
+import React, { useContext, useEffect, useState } from "react";
+import assets from "./../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from './../context/AuthContext';
 import { ChatContext } from "../context/ChatContext";
@@ -13,6 +13,11 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const filteredUsers = input ? users.filter((user) => user.fullName.toLowerCase().includes(input.toLowerCase())) : users ;
+
+  useEffect(()=>{
+    getusers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onlineUsers])
 
   return (
     <div
