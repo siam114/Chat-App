@@ -1,9 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import assets, { messagesDummyData } from "../assets/assets";
 import { formatMessageTime } from "./../lib/utils";
+import { AuthContext } from "../context/AuthContext";
+import { ChatContext } from "../context/ChatContext";
 
-const ChatContainer = ({ selectedUser, setSelectedUser }) => {
+const ChatContainer = () => {
   const scrollEnd = useRef();
+    const {selectedUser, setSelectedUser, messages, sendMessage, getMessages } = useContext(ChatContext);
+    const {authUser, onlineUsers} = useContext(AuthContext);
+  
 
   useEffect(() => {
     if (scrollEnd.current) {
