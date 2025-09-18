@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import toast from "react-hot-toast";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
@@ -85,7 +86,9 @@ export const ChatProvider = ({ children }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [socket, selectedUser])
  
-  const value = {};
+  const value = {
+    messages, users, selectedUser, getUsers, setMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages
+  };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 };
