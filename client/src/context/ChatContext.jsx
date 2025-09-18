@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import toast from "react-hot-toast";
 
@@ -78,6 +78,12 @@ export const ChatProvider = ({ children }) => {
   const unsubscribeFromMessages = () => {
       if(socket) socket.off("newMessage")
   }
+
+  useEffect(() => {
+    subscribeToMessages();
+    return () => unsubscribeFromMessages();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket, selectedUser])
  
   const value = {};
 
