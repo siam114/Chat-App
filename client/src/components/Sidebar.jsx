@@ -11,7 +11,6 @@ const Sidebar = () => {
     users,
     getusers,
     unseenMessages,
-    setUnseenMessages,
   } = useContext(ChatContext);
   const { logout, onlineUsers } = useContext(AuthContext);
 
