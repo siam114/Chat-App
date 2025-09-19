@@ -46,10 +46,10 @@ const ChatContainer = () => {
     <div className="h-full overflow-scroll relative backdrop-blur-lg">
       {/* header */}
       <div className="flex items-center gap-3 py-3 mx-4 border-b border-stone-500">
-        <img src={assets.profile_martin} alt="" className="w-8 rounded-full" />
+        <img src={selectedUser.profilePic || assets.avatar_icon} alt="" className="w-8 rounded-full" />
         <p className="flex-1 text-white text-lg flex items-center gap-2">
-          Martin Johnson
-          <span className="h-2 w-2 rounded-full bg-green-500"></span>
+          {selectedUser.fullName}
+          {onlineUsers.includes(selectedUser._id)}<span className="h-2 w-2 rounded-full bg-green-500"></span>
         </p>
         <img
           onClick={() => setSelectedUser(null)}
@@ -115,7 +115,7 @@ const ChatContainer = () => {
             placeholder="Send a message"
             className="flex-1 p-3 text-sm border-none rounded-lg outline-none text-white placeholder-gray-400"
           />
-          <input type="file" id="image" accept="image/png, image/jpeg" hidden />
+          <input onChange={handleSendImage} type="file" id="image" accept="image/png, image/jpeg" hidden />
           <label htmlFor="image">
             <img
               src={assets.gallery_icon}
