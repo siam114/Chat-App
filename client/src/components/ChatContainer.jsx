@@ -21,27 +21,27 @@ const ChatContainer = () => {
   };
 
   //handle sending an image
-  const handleSendImage = async(e) => {
+  const handleSendImage = async (e) => {
     const file = e.target.files[0];
-    if(!file || !file.type.startsWith("image/")){
+    if (!file || !file.type.startsWith("image/")) {
       toast.error("select an image file");
       return;
     }
     const reader = new FileReader();
 
     reader.onloadend = async () => {
-      await sendMessage({image: reader.result});
+      await sendMessage({ image: reader.result });
       e.target.value = "";
-    }
-    reader.readAsDataURL(file)
-  }
+    };
+    reader.readAsDataURL(file);
+  };
 
-  useEffect(()=>{
-    if(selectedUser){
-      getMessages(selectedUser._id)
+  useEffect(() => {
+    if (selectedUser) {
+      getMessages(selectedUser._id);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[selectedUser])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedUser]);
 
   useEffect(() => {
     if (scrollEnd.current && messages) {
@@ -53,10 +53,16 @@ const ChatContainer = () => {
     <div className="h-full overflow-scroll relative backdrop-blur-lg">
       {/* header */}
       <div className="flex items-center gap-3 py-3 mx-4 border-b border-stone-500">
-        <img src={selectedUser.profilePic || assets.avatar_icon} alt="" className="w-8 rounded-full" />
+        <img
+          src={selectedUser.profilePic || assets.avatar_icon}
+          alt=""
+          className="w-8 rounded-full"
+        />
         <p className="flex-1 text-white text-lg flex items-center gap-2">
           {selectedUser.fullName}
-          {onlineUsers.includes(selectedUser._id)}<span className="h-2 w-2 rounded-full bg-green-500"></span>
+          {onlineUsers.includes(selectedUser._id) && (
+            <span className="h-2 w-2 rounded-full bg-green-500"></span>
+          )}
         </p>
         <img
           onClick={() => setSelectedUser(null)}
@@ -122,7 +128,13 @@ const ChatContainer = () => {
             placeholder="Send a message"
             className="flex-1 p-3 text-sm border-none rounded-lg outline-none text-white placeholder-gray-400"
           />
-          <input onChange={handleSendImage} type="file" id="image" accept="image/png, image/jpeg" hidden />
+          <input
+            onChange={handleSendImage}
+            type="file"
+            id="image"
+            accept="image/png, image/jpeg"
+            hidden
+          />
           <label htmlFor="image">
             <img
               src={assets.gallery_icon}
