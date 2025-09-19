@@ -13,7 +13,6 @@ export const ChatProvider = ({ children }) => {
 
   const { socket, axios } = useContext(AuthContext);
 
-
   //function to get all users for sidebar
   const getUsers = async () => {
     try {
@@ -57,37 +56,46 @@ export const ChatProvider = ({ children }) => {
   };
 
   //function to subscribe to message for selected user
-  const subscribeToMessages = async() => {
-    if(!socket) return;
+  const subscribeToMessages = async () => {
+    if (!socket) return;
 
     socket.on("newMessage", (newMessage) => {
-        if(selectedUser && newMessage.senderId === selectedUser._id){
-            newMessage.seen = true;
-            setMessages((prevMessages)=> [...prevMessages, newMessage]);
-            axios.put(`/api/messages/mark/${newMessage._id}`)
-        }else{
-            setUnseenMessages((prevUnseenMessages) => ({
-                ...prevUnseenMessages, [newMessage.senderId] : 
-                prevUnseenMessages[newMessage.senderId] ? 
-                prevUnseenMessages[newMessage.senderId] +1 : 1
-            }))
-        }
-    })
-  }
+      if (selectedUser && newMessage.senderId === selectedUser._id) {
+        newMessage.seen = true;
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        axios.put(`/api/messages/mark/${newMessage._id}`);
+      } else {
+        setUnseenMessages((prevUnseenMessages) => ({
+          ...prevUnseenMessages,
+          [newMessage.senderId]: prevUnseenMessages[newMessage.senderId]
+            ? prevUnseenMessages[newMessage.senderId] + 1
+            : 1,
+        }));
+      }
+    });
+  };
 
   //function to unsubscribe from messages
   const unsubscribeFromMessages = () => {
-      if(socket) socket.off("newMessage")
-  }
+    if (socket) socket.off("newMessage");
+  };
 
   useEffect(() => {
     subscribeToMessages();
     return () => unsubscribeFromMessages();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socket, selectedUser])
- 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket, selectedUser]);
+
   const value = {
-    messages, users, selectedUser, getUsers, setMessages, sendMessage, setSelectedUser, unseenMessages, setUnseenMessages
+    messages,
+    users,
+    selectedUser,
+    getUsers,
+    setMessages,
+    sendMessage,
+    setSelectedUser,
+    unseenMessages,
+    setUnseenMessages,
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
