@@ -3,6 +3,7 @@ import assets, { messagesDummyData } from "../assets/assets";
 import { formatMessageTime } from "./../lib/utils";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
+import toast from "react-hot-toast";
 
 const ChatContainer = () => {
   const scrollEnd = useRef();
@@ -20,6 +21,13 @@ const ChatContainer = () => {
   };
 
   //handle sending an image
+  const handleSendImage = async(e) => {
+    const file = e.target.files[0];
+    if(!file || !file.type.startsWith("image/")){
+      toast.error("select an image file");
+      return;
+    }
+  }
 
   useEffect(() => {
     if (scrollEnd.current) {
