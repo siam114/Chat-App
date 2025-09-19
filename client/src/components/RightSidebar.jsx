@@ -1,9 +1,13 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import assets, { imagesDummyData } from "../assets/assets";
 import { ChatContext } from './../context/ChatContext';
+import { AuthContext } from "../context/AuthContext";
 
 const RightSideBar = () => {
-  const {selectedUser, messages} = useContext(ChatContext)
+  const {selectedUser, messages} = useContext(ChatContext);
+  const {logout, onlineUsers} = useContext(AuthContext);
+  const [msgImages, setMsgImages] = useState([]);
+  
   return (
     selectedUser && (
       <div
