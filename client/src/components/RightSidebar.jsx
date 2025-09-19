@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import assets, { imagesDummyData } from "../assets/assets";
+import { ChatContext } from './../context/ChatContext';
 
-const RightSideBar = ({ selectedUser }) => {
+const RightSideBar = () => {
+  const {selectedUser, messages} = useContext(ChatContext)
   return (
     selectedUser && (
       <div
