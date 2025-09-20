@@ -10,7 +10,9 @@ const RightSideBar = () => {
 
   //get all the image from the messages and set them to state
   useEffect(()=>{
-    msgImages.filter(msg=>msg.image).map(msg => msg.image)
+       setMsgImages (
+        messages.filter(msg => msg.image).map(msg=>msg.image)
+       )
   },[messages])
  
   return (
