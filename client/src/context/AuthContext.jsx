@@ -12,7 +12,6 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [authUser, setAuthUser] = useState(null);
-  console.log("🚀 ~ AuthProvider ~ authUser:", authUser)
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
   const [loading, setLoading] = useState(true)
@@ -22,7 +21,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(true)
     try {
       const { data } = await axios.get("/api/auth/check");
-      console.log("🚀 ~ checkAuth ~ data:", data)
       
       if (data.success) {
         setAuthUser(data.user);
