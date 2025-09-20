@@ -10,9 +10,9 @@ const RightSideBar = () => {
 
   //get all the image from the messages and set them to state
   useEffect(()=>{
-    setMsgImages.filter(msg=>msg.image).map(msg => msg.image)
+    msgImages.filter(msg=>msg.image).map(msg => msg.image)
   },[messages])
-
+ 
   return (
     selectedUser && (
       <div

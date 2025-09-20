@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import assets from "./../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./../context/AuthContext";
@@ -9,7 +9,7 @@ const Sidebar = () => {
     selectedUser,
     setSelectedUser,
     users,
-    getusers,
+    getUsers,
     unseenMessages,
     setUnseenMessages,
   } = useContext(ChatContext);
@@ -26,7 +26,7 @@ const Sidebar = () => {
     : users;
 
   useEffect(() => {
-    getusers();
+    getUsers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onlineUsers]);
 
