@@ -83,10 +83,12 @@ export const updateProfile = async (req, res) => {
     const userId = req.user._id;
     let updatedUser;
 
+    console.log("🚀 ~ updateProfile ~ profilePic:", !!profilePic)
     if(!profilePic) {
      updatedUser = await User.findByIdAndUpdate(userId, {bio,fullName}, {new: true});
     }else{
       const upload = await cloudinary.uploader.upload(profilePic);
+      console.log("🚀 ~ updateProfile ~ upload:", upload)
 
       updatedUser = await User.findByIdAndUpdate(userId, {profilePic: upload.secure_url, bio, fullName}, {new: true});
     }

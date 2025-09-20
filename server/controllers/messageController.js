@@ -35,7 +35,9 @@ export const getUsersForSidebar = async (req, res) => {
 export const getMessages = async (req, res) => {
   try {
     const { id: selectedUserId } = req.params;
+    console.log("🚀 ~ getMessages ~ selectedUserId:", selectedUserId);
     const myId = req.user._id;
+    console.log("🚀 ~ getMessages ~ myId:", myId);
 
     const messages = await Message.find({
       $or: [
@@ -86,12 +88,20 @@ export const sendMessage = async (req, res) => {
       receiverId,
       text,
       image: imageUrl,
+      seen: false,
     });
 
     //emit the new message using socket io
     const receiverSocketId = userSocketMap[receiverId];
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", newMessage);
+       await Message.create({
+        senderId,
+        receiverId,
+        text,
+        image: imageUrl,
+        seen: false,
+      });
     }
 
     res.json({ success: true, newMessage });
