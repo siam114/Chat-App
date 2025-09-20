@@ -35,9 +35,7 @@ export const getUsersForSidebar = async (req, res) => {
 export const getMessages = async (req, res) => {
   try {
     const { id: selectedUserId } = req.params;
-    console.log("🚀 ~ getMessages ~ selectedUserId:", selectedUserId);
     const myId = req.user._id;
-    console.log("🚀 ~ getMessages ~ myId:", myId);
 
     const messages = await Message.find({
       $or: [
