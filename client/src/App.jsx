@@ -10,7 +10,7 @@ import Loader from './components/Loader';
 const App = () => {
   const {authUser, loading} = useContext(AuthContext)
   return (
-    <div className="bg-[url('./src/assets/bgImage.svg')] bg-contain ">
+    <div className="bg-[url('/bgImage.svg')] bg-contain ">
       <Toaster/>
       <Routes>
         <Route path='/' element={loading ? <Loader/> : authUser ? <HomePage/> : <Navigate to="/login"/>}/>
