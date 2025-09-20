@@ -12,19 +12,26 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [authUser, setAuthUser] = useState(null);
+  console.log("🚀 ~ AuthProvider ~ authUser:", authUser)
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [socket, setSocket] = useState(null);
+  const [loading, setLoading] = useState(true)
 
   //check if user is authenticated and if so, set the user data and connect the socket
   const checkAuth = async () => {
+    setLoading(true)
     try {
       const { data } = await axios.get("/api/auth/check");
+      console.log("🚀 ~ checkAuth ~ data:", data)
+      
       if (data.success) {
         setAuthUser(data.user);
         connectSocket(data.user);
       }
     } catch (error) {
       toast.error(error.message);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -103,6 +110,7 @@ export const AuthProvider = ({ children }) => {
     login,
     logout,
     updateProfile,
+    loading
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

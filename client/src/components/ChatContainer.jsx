@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import assets from "../assets/assets";
-import { formatMessageTime } from "./../lib/utils";
+import { formatDate} from "./../lib/utils";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import toast from "react-hot-toast";
@@ -68,7 +68,7 @@ const ChatContainer = () => {
           onClick={() => setSelectedUser(null)}
           src={assets.arrow_icon}
           alt=""
-          className="md:hidden max-w-7"
+          className="md:hidden max-w-7 rounded-full"
         />
         <img src={assets.help_icon} alt="" className="max-w-5 max-md:hidden" />
       </div>
@@ -109,7 +109,7 @@ const ChatContainer = () => {
                 alt=""
               />
               <p className="text-gray-500">
-                {formatMessageTime(msg.createdAt)}
+                {formatDate(msg?.createdAt || new Date())}
               </p>
             </div>
           </div>
